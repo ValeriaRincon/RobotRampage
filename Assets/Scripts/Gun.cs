@@ -5,6 +5,10 @@ using UnityEngine;
 public class Gun : MonoBehaviour
 {
     public float fireRate;
+    public Ammo ammo;
+    public AudioClip liveFire;
+    public AudioClip dryFire;
+
     protected float lastFireTime;
 
     // Start is called before the first frame update
@@ -20,6 +24,15 @@ public class Gun : MonoBehaviour
 
     protected void Fire()
     {
-        GetComponentInChildren<Animator>().Play("Fire");
+        if (ammo.HasAmmo(tag))
+        {
+            GetComponent<AudioSource>().PlayOneShot(liveFire);
+            ammo.ConsumeAmmo(tag);
+            GetComponentInChildren<Animator>().Play("Fire");
+        }
+        else
+        {
+            GetComponent<AudioSource>().PlayOneShot(dryFire);
+        }
     }
 }
