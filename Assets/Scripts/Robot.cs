@@ -10,6 +10,7 @@ public class Robot : MonoBehaviour
     public int health;
     public int range;
     public float fireRate;
+    public Animator robot;
 
     public Transform missileFireSpot;
     UnityEngine.AI.NavMeshAgent agent;
@@ -45,6 +46,6 @@ public class Robot : MonoBehaviour
 
     private void fire()
     {
-        Debug.Log("Fire");
+        robot.Play("Fire");
     }
 }
